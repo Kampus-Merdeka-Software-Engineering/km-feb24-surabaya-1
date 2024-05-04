@@ -1,0 +1,85 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+  padding: 15;
+  border-bottom: 1px solid #ddd;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+}
+
+nav {
+  box-shadow: 0px 10px 16px rgba(0, 0, 0, 0.3);
+}
+
+nav ul,
+nav li,
+nav a {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+}
+
+.flex-container {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.flex-item {
+  display: grid;
+  place-items: center;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  flex: 1;
+  min-width: 350px;
+  min-height: 200px;
+}
+
+#item-1 table {
+  width: 100%;
+  height: auto;
+  border-collapse: collapse;
+}
+
+#item-1 table caption {
+  padding: 10px;
+}
+
+#item-1 th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background-color: #b2b2b2dd;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+td {
+  font-weight: normal;
+}
+
+#item-1 table .value {
+  text-align: center;
+}
