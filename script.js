@@ -1,2 +1,2 @@
-console.log("ini langsung push ke main");
-console.log("line baru lagi");
+console.log("ini langsung push ke main, tambahan");
+console.log("line baru");
