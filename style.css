@@ -48,7 +48,8 @@ nav a {
   border-radius: 8px;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
   flex: 1;
-  min-width: 350px;
+  width: 100%;
+  min-width: 400px;
   min-height: 200px;
 }
 
@@ -83,3 +84,7 @@ td {
 #item-1 table .value {
   text-align: center;
 }
+
+/* img {
+  width: 100%;
+} */
