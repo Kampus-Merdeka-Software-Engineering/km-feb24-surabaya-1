@@ -1,0 +1,278 @@
+[
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "1",
+    "jumlah_transaksi": "119",
+    "total_revenue": "247.75"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "2",
+    "jumlah_transaksi": "137",
+    "total_revenue": "279.25"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "3",
+    "jumlah_transaksi": "138",
+    "total_revenue": "262.75"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "4",
+    "jumlah_transaksi": "126",
+    "total_revenue": "250.25"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "5",
+    "jumlah_transaksi": "180",
+    "total_revenue": "338.0"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "6",
+    "jumlah_transaksi": "204",
+    "total_revenue": "386.25"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "7",
+    "jumlah_transaksi": "182",
+    "total_revenue": "373.5"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "8",
+    "jumlah_transaksi": "141",
+    "total_revenue": "282.25"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "9",
+    "jumlah_transaksi": "97",
+    "total_revenue": "192.0"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "10",
+    "jumlah_transaksi": "122",
+    "total_revenue": "228.75"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "11",
+    "jumlah_transaksi": "106",
+    "total_revenue": "203.75"
+  },
+  {
+    "Location": "Brunswick Sq Mall",
+    "Month": "12",
+    "jumlah_transaksi": "120",
+    "total_revenue": "225.5"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "3",
+    "jumlah_transaksi": "128",
+    "total_revenue": "238.25"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "4",
+    "jumlah_transaksi": "321",
+    "total_revenue": "601.75"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "5",
+    "jumlah_transaksi": "329",
+    "total_revenue": "635.25"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "6",
+    "jumlah_transaksi": "368",
+    "total_revenue": "705.75"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "7",
+    "jumlah_transaksi": "368",
+    "total_revenue": "722.5"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "8",
+    "jumlah_transaksi": "334",
+    "total_revenue": "752.25"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "9",
+    "jumlah_transaksi": "312",
+    "total_revenue": "710.5"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "10",
+    "jumlah_transaksi": "340",
+    "total_revenue": "771.25"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "11",
+    "jumlah_transaksi": "275",
+    "total_revenue": "611.5"
+  },
+  {
+    "Location": "EB Public Library",
+    "Month": "12",
+    "jumlah_transaksi": "282",
+    "total_revenue": "602.75"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "1",
+    "jumlah_transaksi": "94",
+    "total_revenue": "173.0"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "2",
+    "jumlah_transaksi": "104",
+    "total_revenue": "184.5"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "3",
+    "jumlah_transaksi": "88",
+    "total_revenue": "161.5"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "4",
+    "jumlah_transaksi": "67",
+    "total_revenue": "117.0"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "5",
+    "jumlah_transaksi": "61",
+    "total_revenue": "109.75"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "6",
+    "jumlah_transaksi": "70",
+    "total_revenue": "120.75"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "7",
+    "jumlah_transaksi": "70",
+    "total_revenue": "123.75"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "8",
+    "jumlah_transaksi": "126",
+    "total_revenue": "211.25"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "9",
+    "jumlah_transaksi": "109",
+    "total_revenue": "188.0"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "10",
+    "jumlah_transaksi": "83",
+    "total_revenue": "138.25"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "11",
+    "jumlah_transaksi": "93",
+    "total_revenue": "167.5"
+  },
+  {
+    "Location": "Earle Asphalt",
+    "Month": "12",
+    "jumlah_transaksi": "60",
+    "total_revenue": "115.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "1",
+    "jumlah_transaksi": "269",
+    "total_revenue": "462.75"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "2",
+    "jumlah_transaksi": "251",
+    "total_revenue": "445.0"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "3",
+    "jumlah_transaksi": "263",
+    "total_revenue": "449.0"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "4",
+    "jumlah_transaksi": "350",
+    "total_revenue": "650.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "5",
+    "jumlah_transaksi": "263",
+    "total_revenue": "506.0"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "6",
+    "jumlah_transaksi": "287",
+    "total_revenue": "600.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "7",
+    "jumlah_transaksi": "445",
+    "total_revenue": "906.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "8",
+    "jumlah_transaksi": "396",
+    "total_revenue": "795.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "9",
+    "jumlah_transaksi": "299",
+    "total_revenue": "588.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "10",
+    "jumlah_transaksi": "262",
+    "total_revenue": "514.0"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "11",
+    "jumlah_transaksi": "287",
+    "total_revenue": "555.5"
+  },
+  {
+    "Location": "GuttenPlans",
+    "Month": "12",
+    "jumlah_transaksi": "222",
+    "total_revenue": "423.0"
+  }
+]
