@@ -359,9 +359,9 @@ async function fetchData() {
 
     function updateDashboard(option, locationLabel) {
       //CHANGE LOCATION TEXT
-      const locationPrint = document.getElementById("locationPrint");
-      locationPrint.textContent =
-        filterDropdown.options[filterDropdown.selectedIndex].textContent;
+      // const locationPrint = document.getElementById("locationPrint");
+      // locationPrint.textContent =
+      //   filterDropdown.options[filterDropdown.selectedIndex].textContent;
 
       // MENAMPILKAN DATA TOTAL REVENUE KE WEB
       const revenuePrint = document.querySelector(".item3 .dataValue");
@@ -387,8 +387,8 @@ async function fetchData() {
 
     function resetDashboard(reset, initalData) {
       //CHANGE LOCATION TEXT
-      const locationPrint = document.getElementById("locationPrint");
-      locationPrint.textContent = "All Location";
+      // const locationPrint = document.getElementById("locationPrint");
+      // locationPrint.textContent = "All Location";
 
       // MENAMPILKAN DATA TOTAL REVENUE KE WEB
       const revenuePrint = document.querySelector(".item3 .dataValue");
