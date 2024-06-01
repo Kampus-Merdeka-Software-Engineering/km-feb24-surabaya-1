@@ -1,0 +1,293 @@
+/* * {
+  border: 1px solid;
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter, Montserrat, Roboto, Arial;
+  display: flex;
+  height: 100%;
+  background-color: #f1faff;
+}
+
+/* CONTENT SECTION */
+main {
+  margin: 0px 20px;
+  display: flex;
+  flex: 6;
+  flex-direction: column;
+}
+
+header {
+  color: #2c2556;
+  margin: 0px 20px 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.material-symbols-outlined {
+  cursor: pointer;
+}
+
+main header .left h1 {
+  margin-bottom: 0px;
+}
+
+main header .left .time {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main header .left p {
+  margin: 10px 0px 0px;
+  font-size: 14pt;
+  font-weight: 300;
+}
+
+main header .right .profile-card {
+  display: none;
+  position: absolute;
+  transform: translateX(-80%);
+  width: 250px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+main header .right:hover .profile-card {
+  display: block;
+}
+
+main header .right .profile-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.profile-role {
+  font-size: 14px;
+  color: #777;
+  margin: 5px 0;
+}
+
+.profile-description {
+  font-size: 14px;
+  color: #555;
+}
+
+.dropdownFilter {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-weight: normal;
+  appearance: none;
+  font-size: 12pt;
+  padding: 0px;
+  margin: 0px;
+}
+
+.dropdownFilter:focus {
+  outline: none;
+}
+
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: #4d466e;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.filter h5 {
+  padding: 0px;
+  margin: 0px;
+}
+
+option {
+  background-color: lightgrey;
+  color: black;
+}
+
+.content {
+  display: grid;
+  gap: 20px;
+  width: 100%;
+  grid-template-areas:
+    "item1 item2 item3 item4"
+    "item5 item5 item5 item6"
+    "item5 item5 item5 item6"
+    "item7 item7 item8 item8"
+    "item7 item7 item8 item8"
+    "item9 item9 item9 item9"
+    "item9 item9 item9 item9";
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+  color: #2c2556;
+}
+
+.grid-item .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.grid-item .top svg {
+  font-size: 32px;
+  padding-right: 40px;
+}
+
+.grid-item p {
+  margin: 20px;
+  padding-bottom: 00px;
+}
+
+.grid-item .dataTitle {
+  font-weight: bold;
+  margin-top: 0px;
+  font-size: 16pt;
+  color: #2c2556;
+}
+
+.grid-item .dataValue {
+  border-left: 4px solid #4d466e;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.grid-item .shortDesc {
+  border-left: 4px solid #4d466e;
+  color: #676767;
+  margin-top: 0px;
+  padding: 0px 10px 10px 10px;
+}
+
+.item1 {
+  grid-area: item1;
+}
+.item2 {
+  grid-area: item2;
+}
+.item3 {
+  grid-area: item3;
+}
+.item4 {
+  grid-area: item4;
+}
+.item5 {
+  grid-area: item5;
+  display: grid;
+  place-content: center;
+}
+.item6 {
+  grid-area: item6;
+  display: grid;
+  place-content: center;
+}
+.item7 {
+  grid-area: item7;
+}
+.item8 {
+  grid-area: item8;
+}
+.item9 {
+  grid-area: item9;
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+footer {
+  text-align: center;
+}
+
+/* for small desktop */
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+  .content {
+    grid-template-areas:
+      "item1 item2 item3"
+      "item4 item4 item4"
+      "item5 item5 item5"
+      "item5 item5 item5"
+      "item6 item6 item6"
+      "item6 item6 item6"
+      "item7 item7 item7"
+      "item7 item7 item7"
+      "item8 item8 item8"
+      "item8 item8 item8"
+      "item9 item9 item9"
+      "item9 item9 item9";
+  }
+}
+/* for Tablet */
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+  .content {
+    grid-template-areas:
+      "item1 item2"
+      "item3 item4"
+      "item5 item5"
+      "item5 item5"
+      "item6 item6"
+      "item6 item6"
+      "item7 item7"
+      "item7 item7"
+      "item8 item8"
+      "item8 item8"
+      "item9 item9"
+      "item9 item9";
+  }
+}
+
+/* for Smartphone */
+@media (max-width: 767px) {
+  .content {
+    grid-template-areas:
+      "item1"
+      "item2"
+      "item3"
+      "item4"
+      "item5"
+      "item5"
+      "item6"
+      "item6"
+      "item7"
+      "item7"
+      "item8"
+      "item8"
+      "item9"
+      "item9";
+  }
+}
