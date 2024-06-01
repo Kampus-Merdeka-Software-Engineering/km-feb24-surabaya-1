@@ -1,19 +1,3 @@
-//TOGGLE SIDEBAR BUTTON
-const sidebarBtn = document.getElementById("sidebarBtn");
-sidebarBtn.addEventListener("click", function () {
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    const sideBar = document.querySelector(".sideBar ul");
-    sideBar.classList.toggle("sideBarClose");
-  } else {
-    const logo = document.querySelector(".top-sideBar h2");
-    const sideBar = document.querySelectorAll(".sidebar-menu li h5");
-    logo.classList.toggle("sideBarClose");
-    for (let i = 0; i < sideBar.length; i++) {
-      sideBar[i].classList.toggle("sideBarClose");
-    }
-  }
-});
-
 //FUNSI UNTUK UPDATE WAKTU
 function updateDateTime() {
   const now = new Date();
@@ -87,7 +71,7 @@ function dataProcessingByLocation(data, loc) {
     }
   }
 
-  //4.
+  //4. MENCARI REVENUE BULANAN PERLOKASI
   const revenueByLocation = {};
   // Initialize each location with an array of 12 months
   data.forEach((e) => {
@@ -172,7 +156,7 @@ function initialDataProcessing(data) {
     }
   }
 
-  //4.
+  //4. MENCARI REVENUE BULANAN TIAP LOKASI
   let revenueByLocation = [];
   // Initialize each location with an array of 12 months
   data.forEach((e) => {
@@ -317,7 +301,7 @@ async function fetchData() {
       data: dataTType,
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
           title: {
             display: true,
@@ -358,11 +342,6 @@ async function fetchData() {
     });
 
     function updateDashboard(option, locationLabel) {
-      //CHANGE LOCATION TEXT
-      // const locationPrint = document.getElementById("locationPrint");
-      // locationPrint.textContent =
-      //   filterDropdown.options[filterDropdown.selectedIndex].textContent;
-
       // MENAMPILKAN DATA TOTAL REVENUE KE WEB
       const revenuePrint = document.querySelector(".item3 .dataValue");
       revenuePrint.textContent = `$${option[0]}`;
@@ -386,10 +365,6 @@ async function fetchData() {
     }
 
     function resetDashboard(reset, initalData) {
-      //CHANGE LOCATION TEXT
-      // const locationPrint = document.getElementById("locationPrint");
-      // locationPrint.textContent = "All Location";
-
       // MENAMPILKAN DATA TOTAL REVENUE KE WEB
       const revenuePrint = document.querySelector(".item3 .dataValue");
       revenuePrint.textContent = `$${reset[0]}`;
