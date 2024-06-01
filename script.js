@@ -93,15 +93,17 @@ function dataProcessingByLocation(data, loc) {
     }
   });
 
-  arrOutput = [
+  // MENYIMPAN DATA UNTUK TABEL PER LOKASI
+  const tabelPerLokasi = data.filter((e) => e.Location == loc);
+
+  return [
     Math.round(totalRevenue).toLocaleString("id-ID"),
     jumlahTransaksi.toLocaleString("id-ID"),
     [jumlahCashLoc, jumlahCreditLoc],
     topProduct,
     revenueByLocation,
+    tabelPerLokasi,
   ];
-
-  return arrOutput;
 }
 
 function initialDataProcessing(data) {
@@ -196,7 +198,7 @@ async function fetchData() {
     const data = await response.json();
 
     //DATATABLE
-    new DataTable("#myTable");
+    const myTable = new DataTable("#myTable");
     $("#myTable").DataTable({
       data: data,
       columns: [
@@ -360,6 +362,29 @@ async function fetchData() {
         { label: locationLabel, data: option[4][locationLabel] },
       ];
 
+      //MENGUBAH DATATABLE BERDASARKAN DATA LOKASI
+      myTable.clear().draw();
+      $("#myTable")
+        .DataTable({
+          data: option[5],
+          columns: [
+            { data: "Transaction" },
+            { data: "Location" },
+            { data: "Product" },
+            { data: "Category" },
+            { data: "TransDate" },
+            { data: "RPrice" },
+            { data: "RQty" },
+            { data: "Revenue" },
+          ],
+          bDestroy: true,
+          // scrollX: true,
+          scrollY: "50vh",
+          paging: true,
+          responsive: true,
+        })
+        .draw();
+
       locationRevenueChart.update();
       transactionTypeChart.update();
     }
@@ -391,6 +416,29 @@ async function fetchData() {
           data: initalData[4]["EB Public Library"],
         },
       ];
+
+      //
+      myTable.clear().draw();
+      $("#myTable")
+        .DataTable({
+          data: data,
+          columns: [
+            { data: "Transaction" },
+            { data: "Location" },
+            { data: "Product" },
+            { data: "Category" },
+            { data: "TransDate" },
+            { data: "RPrice" },
+            { data: "RQty" },
+            { data: "Revenue" },
+          ],
+          bDestroy: true,
+          // scrollX: true,
+          scrollY: "50vh",
+          paging: true,
+          responsive: true,
+        })
+        .draw();
 
       locationRevenueChart.update();
       transactionTypeChart.update();
