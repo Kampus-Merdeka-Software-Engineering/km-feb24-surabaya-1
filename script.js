@@ -1,3 +1,73 @@
+document.addEventListener('DOMContentLoaded', function () {
+  fetch('assets/json/rawData.json')
+    .then(response => response.json())
+    .then(data => {
+      // Debug: Print the raw data to console
+      console.log('Raw data:', data);
+
+      const revenueData = {};
+
+      // Proses data dari JSON untuk menghitung total transaksi per revenue
+      data.forEach(item => {
+        const revenue = parseFloat(item.Revenue);
+        if (!revenueData[revenue]) {
+          revenueData[revenue] = 0;
+        }
+        revenueData[revenue] += 1;
+      });
+
+      // Debug: Print the grouped revenue data to console
+      console.log('Grouped revenue data:', revenueData);
+
+      // Urutkan data berdasarkan total transaksi
+      const sortedRevenueData = Object.entries(revenueData).sort((a, b) => b[1] - a[1]);
+
+      // Debug: Print the sorted revenue data to console
+      console.log('Sorted revenue data:', sortedRevenueData);
+
+      const labels = sortedRevenueData.map(item => item[0]);
+      const values = sortedRevenueData.map(item => item[1]);
+
+      // Debug: Print the labels and values to console
+      console.log('Labels:', labels);
+      console.log('Values:', values);
+
+      // Menggambar line chart menggunakan Chart.js
+      const ctx = document.getElementById('lineChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Total Transactions per Revenue',
+            data: values,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Revenue'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Total Transactions'
+              }
+            }
+          }
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching JSON data:', error));
+});
+
 //FUNSI UNTUK UPDATE WAKTU
 function updateDateTime() {
   const now = new Date();
