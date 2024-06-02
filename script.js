@@ -1,73 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-  fetch('assets/json/rawData.json')
-    .then(response => response.json())
-    .then(data => {
-      // Debug: Print the raw data to console
-      console.log('Raw data:', data);
-
-      const revenueData = {};
-
-      // Proses data dari JSON untuk menghitung total transaksi per revenue
-      data.forEach(item => {
-        const revenue = parseFloat(item.Revenue);
-        if (!revenueData[revenue]) {
-          revenueData[revenue] = 0;
-        }
-        revenueData[revenue] += 1;
-      });
-
-      // Debug: Print the grouped revenue data to console
-      console.log('Grouped revenue data:', revenueData);
-
-      // Urutkan data berdasarkan total transaksi
-      const sortedRevenueData = Object.entries(revenueData).sort((a, b) => b[1] - a[1]);
-
-      // Debug: Print the sorted revenue data to console
-      console.log('Sorted revenue data:', sortedRevenueData);
-
-      const labels = sortedRevenueData.map(item => item[0]);
-      const values = sortedRevenueData.map(item => item[1]);
-
-      // Debug: Print the labels and values to console
-      console.log('Labels:', labels);
-      console.log('Values:', values);
-
-      // Menggambar line chart menggunakan Chart.js
-      const ctx = document.getElementById('lineChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Total Transactions per Revenue',
-            data: values,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Revenue'
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Total Transactions'
-              }
-            }
-          }
-        }
-      });
-    })
-    .catch(error => console.error('Error fetching JSON data:', error));
-});
-
 //FUNSI UNTUK UPDATE WAKTU
 function updateDateTime() {
   const now = new Date();
@@ -163,15 +93,38 @@ function dataProcessingByLocation(data, loc) {
     }
   });
 
-  arrOutput = [
+  //5. MENYIMPAN DATA UNTUK TABEL PER LOKASI
+  const tabelPerLokasi = data.filter((e) => e.Location == loc);
+
+  //6. Mengelompokkan data berdasarkan Month dan menghitung total quantity
+  const monthQuantityMap = new Map();
+
+  data.forEach((item) => {
+    if (item.Location === loc) {
+      const month = new Date(item.TransDate).getMonth() + 1; // Extract month from TransDate
+      const quantity = parseInt(item.RQty);
+
+      if (monthQuantityMap.has(month)) {
+        monthQuantityMap.set(month, monthQuantityMap.get(month) + quantity);
+      } else {
+        monthQuantityMap.set(month, quantity);
+      }
+    }
+  });
+
+  // Memisahkan hasil map menjadi dua array untuk chart
+  const labels = Array.from(monthQuantityMap.keys()).sort((a, b) => a - b); // Sort by month
+  const quantities = labels.map((month) => monthQuantityMap.get(month));
+
+  return [
     Math.round(totalRevenue).toLocaleString("id-ID"),
     jumlahTransaksi.toLocaleString("id-ID"),
     [jumlahCashLoc, jumlahCreditLoc],
     topProduct,
     revenueByLocation,
+    tabelPerLokasi,
+    [labels, quantities],
   ];
-
-  return arrOutput;
 }
 
 function initialDataProcessing(data) {
@@ -246,12 +199,29 @@ function initialDataProcessing(data) {
     revenueByLocation[location][month] += revenue;
   });
 
+  //5. Mengelompokkan data berdasarkan Month dan menghitung total quantity
+  const monthQuantityMap = new Map();
+  data.forEach((item) => {
+    const month = new Date(item.TransDate).getMonth() + 1; // Extract month from TransDate
+    const quantity = parseInt(item.RQty);
+    if (monthQuantityMap.has(month)) {
+      monthQuantityMap.set(month, monthQuantityMap.get(month) + quantity);
+    } else {
+      monthQuantityMap.set(month, quantity);
+    }
+  });
+
+  // Memisahkan hasil map menjadi dua array untuk chart
+  const labels = Array.from(monthQuantityMap.keys()).sort((a, b) => a - b); // Sort by month
+  const quantities = labels.map((month) => monthQuantityMap.get(month));
+
   return [
     totalRevenueOutput,
     jumlahTransaksiOuput,
     transactionTypeOutput,
     topProduct,
     revenueByLocation,
+    [labels, quantities],
   ];
 }
 
@@ -266,7 +236,7 @@ async function fetchData() {
     const data = await response.json();
 
     //DATATABLE
-    new DataTable("#myTable");
+    const myTable = new DataTable("#myTable");
     $("#myTable").DataTable({
       data: data,
       columns: [
@@ -387,6 +357,55 @@ async function fetchData() {
       },
     });
 
+    //MEMBUAT DAN MENAMPILKAN CHART TOTAL PRODUCT SOLD BY MONTH
+    const ctxBar = document
+      .getElementById("horizontalBarChart")
+      .getContext("2d");
+    const productSalesPerMonth = new Chart(ctxBar, {
+      type: "bar",
+      data: {
+        labels: initalData[5][0].map((month) =>
+          new Date(0, month - 1).toLocaleString("en", { month: "long" })
+        ),
+        datasets: [
+          {
+            label: "Total Product",
+            data: initalData[5][1],
+            backgroundColor: "rgba(75, 192, 192, 0.5)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        indexAxis: "y", // Horizontal bar chart
+        plugins: {
+          title: {
+            display: true,
+            text: "Total Product Sold by Month",
+            font: {
+              size: 20,
+            },
+            color: "black",
+          },
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: "Product Sold",
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: "Month",
+            },
+          },
+        },
+      },
+    });
+
     //FIlTER DROPDOWN
     const filterDropdown = document.getElementById("location");
     console.log(filterDropdown);
@@ -430,8 +449,38 @@ async function fetchData() {
         { label: locationLabel, data: option[4][locationLabel] },
       ];
 
+      // MENAMPILKAN DATA PRODUCT SALES BULANAN PER LOKASI
+      productSalesPerMonth.data.labels = option[6][0].map((month) =>
+        new Date(0, month - 1).toLocaleString("en", { month: "long" })
+      );
+      productSalesPerMonth.data.datasets[0].data = option[6][1];
+
+      //MENGUBAH DATATABLE BERDASARKAN DATA LOKASI
+      myTable.clear().draw();
+      $("#myTable")
+        .DataTable({
+          data: option[5],
+          columns: [
+            { data: "Transaction" },
+            { data: "Location" },
+            { data: "Product" },
+            { data: "Category" },
+            { data: "TransDate" },
+            { data: "RPrice" },
+            { data: "RQty" },
+            { data: "Revenue" },
+          ],
+          bDestroy: true,
+          // scrollX: true,
+          scrollY: "50vh",
+          paging: true,
+          responsive: true,
+        })
+        .draw();
+
       locationRevenueChart.update();
       transactionTypeChart.update();
+      productSalesPerMonth.update();
     }
 
     function resetDashboard(reset, initalData) {
@@ -462,13 +511,42 @@ async function fetchData() {
         },
       ];
 
+      // MENAMPILKAN DATA PRODUCT SALES BULANAN PER LOKASI
+      productSalesPerMonth.data.labels = initalData[5][0].map((month) =>
+        new Date(0, month - 1).toLocaleString("en", { month: "long" })
+      );
+      productSalesPerMonth.data.datasets[0].data = initalData[5][1];
+
+      //
+      myTable.clear().draw();
+      $("#myTable")
+        .DataTable({
+          data: data,
+          columns: [
+            { data: "Transaction" },
+            { data: "Location" },
+            { data: "Product" },
+            { data: "Category" },
+            { data: "TransDate" },
+            { data: "RPrice" },
+            { data: "RQty" },
+            { data: "Revenue" },
+          ],
+          bDestroy: true,
+          // scrollX: true,
+          scrollY: "50vh",
+          paging: true,
+          responsive: true,
+        })
+        .draw();
+
       locationRevenueChart.update();
       transactionTypeChart.update();
+      productSalesPerMonth.update();
     }
   } catch (error) {
     console.log("There has been a problem with your fetch operation:", error);
   }
 }
-
 
 fetchData();
