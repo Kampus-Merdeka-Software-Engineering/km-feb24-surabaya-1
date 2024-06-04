@@ -868,13 +868,12 @@ async function fetchData() {
       );
       productSalesPerMonth.data.datasets[0].data = reset[5][1];
 
-      //
       categoriesRevenueChart.data.labels = reset[6][0];
       categoriesRevenueChart.data.datasets = categoriesDatasets;
 
       //MENAMPILKAN DATA TRANSAKSI CATEGORI
       categoryDonut.data.labels = reset[7][0];
-      categoryDonut.data.datasets[0].data = option[7][1];
+      categoryDonut.data.datasets[0].data = reset[7][1];
 
       //MENAMPILKAN DATA TOP 10 PORDUCT
       top10ProductChart.data.labels = reset[8][0];
