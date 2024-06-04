@@ -73,6 +73,19 @@ main header .right .profile-card::before {
   border-color: transparent transparent white transparent;
 }
 
+main header .right a {
+  text-decoration: none;
+}
+
+main header .right a:active {
+  color: #2c2556;
+}
+
+main header .right:hover span {
+  background-color: lightgray;
+  border-radius: 50%;
+}
+
 .profile-name {
   font-size: 18px;
   font-weight: bold;
@@ -99,6 +112,7 @@ main header .right .profile-card::before {
   font-size: 12pt;
   padding: 0px;
   margin: 0px;
+  cursor: pointer;
 }
 
 .dropdownFilter:focus {
@@ -109,13 +123,12 @@ main header .right .profile-card::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
+  gap: 4px;
   background-color: #4d466e;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 20px;
-  color: white;
 }
 
 .filter h5 {
@@ -123,8 +136,12 @@ main header .right .profile-card::before {
   margin: 0px;
 }
 
+.filter select {
+  font-weight: bold;
+  /* text-transform: uppercase; */
+}
+
 option {
-  background-color: lightgrey;
   color: black;
 }
 
@@ -138,8 +155,10 @@ option {
     "item5 item5 item5 item6"
     "item7 item7 item8 item8"
     "item7 item7 item8 item8"
-    "item9 item9 item9 item9"
-    "item9 item9 item9 item9";
+    "item9 item9 item10 item10"
+    "item9 item9 item10 item10"
+    "item11 item11 item11 item11"
+    "item11 item11 item11 item11";
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(200px, auto);
 }
@@ -152,6 +171,10 @@ option {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
   overflow: auto;
   color: #2c2556;
+}
+
+.grid-item:not(:last-child):hover {
+  background-color: rgb(225, 228, 230);
 }
 
 .grid-item .top {
@@ -184,6 +207,10 @@ option {
   padding: 10px;
   font-weight: bold;
   font-size: 24px;
+  max-width: 75%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .grid-item .shortDesc {
@@ -223,11 +250,25 @@ option {
 }
 .item9 {
   grid-area: item9;
+  max-height: 420px;
+  display: grid;
+  place-content: center;
+}
+.item10 {
+  grid-area: item10;
+}
+.item11 {
+  grid-area: item11;
 }
 
 canvas {
   width: 100%;
   height: 100%;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
 }
 
 footer {
@@ -249,7 +290,11 @@ footer {
       "item8 item8 item8"
       "item8 item8 item8"
       "item9 item9 item9"
-      "item9 item9 item9";
+      "item9 item9 item9"
+      "item10 item10 item10"
+      "item10 item10 item10"
+      "item11 item11 item11"
+      "item11 item11 item11";
   }
 }
 /* for Tablet */
@@ -267,7 +312,11 @@ footer {
       "item8 item8"
       "item8 item8"
       "item9 item9"
-      "item9 item9";
+      "item9 item9"
+      "item10 item10"
+      "item10 item10"
+      "item11 item11"
+      "item11 item11";
   }
 }
 
@@ -288,6 +337,10 @@ footer {
       "item8"
       "item8"
       "item9"
-      "item9";
+      "item9"
+      "item10"
+      "item10"
+      "item11"
+      "item11";
   }
 }
