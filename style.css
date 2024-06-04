@@ -138,8 +138,10 @@ option {
     "item5 item5 item5 item6"
     "item7 item7 item8 item8"
     "item7 item7 item8 item8"
-    "item9 item9 item9 item9"
-    "item9 item9 item9 item9";
+    "item9 item9 item10 item10"
+    "item9 item9 item10 item10"
+    "item11 item11 item11 item11"
+    "item11 item11 item11 item11";
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-auto-rows: minmax(200px, auto);
 }
@@ -224,6 +226,12 @@ option {
 .item9 {
   grid-area: item9;
 }
+.item10 {
+  grid-area: item10;
+}
+.item11 {
+  grid-area: item11;
+}
 
 canvas {
   width: 100%;
@@ -249,7 +257,11 @@ footer {
       "item8 item8 item8"
       "item8 item8 item8"
       "item9 item9 item9"
-      "item9 item9 item9";
+      "item9 item9 item9"
+      "item10 item10 item10"
+      "item10 item10 item10"
+      "item11 item11 item11"
+      "item11 item11 item11";
   }
 }
 /* for Tablet */
@@ -267,7 +279,11 @@ footer {
       "item8 item8"
       "item8 item8"
       "item9 item9"
-      "item9 item9";
+      "item9 item9"
+      "item10 item10"
+      "item10 item10"
+      "item11 item11"
+      "item11 item11";
   }
 }
 
@@ -288,6 +304,10 @@ footer {
       "item8"
       "item8"
       "item9"
-      "item9";
+      "item9"
+      "item10"
+      "item10"
+      "item11"
+      "item11";
   }
 }
