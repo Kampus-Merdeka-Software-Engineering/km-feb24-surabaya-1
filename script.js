@@ -1,3 +1,18 @@
+const teamMember = document.getElementById("teamMember");
+teamMember.addEventListener("click", function () {
+  Swal.fire({
+    title: "Pindah ke halaman Team Member?",
+    showDenyButton: true,
+    confirmButtonText: "Yes",
+    denyButtonText: "No",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "./teamMemberPage/teamMember.html";
+    } else if (result.isDenied) {
+    }
+  });
+});
+
 //FUNSI UNTUK UPDATE WAKTU
 function updateDateTime() {
   const now = new Date();
@@ -16,6 +31,17 @@ setInterval(updateDateTime, 60000); //UPDATE WAKTU PER 1 MENIT
 updateDateTime(); //PANGGIL FUNGSI UPDATE WAKTU
 
 function dataProcessingByLocation(data, loc) {
+  //PRODUCT SALES
+  let productSales = 0;
+  let productSalesOutput = 0;
+  data.forEach((e) => {
+    if (e.Location == loc) {
+      productSales += parseInt(e.RQty);
+    }
+  });
+
+  productSalesOutput = productSales.toLocaleString("id-ID");
+
   //0. TOTAL REVENUE PER LOKASI
   let totalRevenue = 0;
   for (let i = 0; i < data.length; i++) {
@@ -117,26 +143,40 @@ function dataProcessingByLocation(data, loc) {
 
   //7. Proses data untuk mendapatkan total_revenue per location dan category
   const dataMap = new Map();
+
   data.forEach((item) => {
-    const location = loc;
+    const location = item.Location;
     const category = item.Category;
     const revenue = parseFloat(item.Revenue);
 
-    if (!dataMap.has(location)) {
-      dataMap.set(location, new Map());
-    }
+    // Filter untuk lokasi tertentu
+    if (loc.includes(location)) {
+      if (!dataMap.has(location)) {
+        dataMap.set(location, new Map());
+      }
 
-    if (!dataMap.get(location).has(category)) {
-      dataMap.get(location).set(category, 0);
-    }
+      if (!dataMap.get(location).has(category)) {
+        dataMap.get(location).set(category, 0);
+      }
 
-    const currentRevenue = dataMap.get(location).get(category);
-    dataMap.get(location).set(category, currentRevenue + revenue);
+      const currentRevenue = dataMap.get(location).get(category);
+      dataMap.get(location).set(category, currentRevenue + revenue);
+    }
   });
 
   // Buat array untuk lokasi dan kategori
   const locations = Array.from(dataMap.keys());
-  const categories = Array.from(new Set(data.map((item) => item.Category)));
+  const categoriesRev = Array.from(new Set(data.map((item) => item.Category)));
+
+  // Buat datasets untuk Chart.js
+  const categoriesDatasets = categoriesRev.map((category, index) => {
+    return {
+      label: category,
+      data: locations.map((location) => {
+        return dataMap.get(location).get(category) || 0;
+      }),
+    };
+  });
 
   //8.
   const categoryMap = {};
@@ -197,13 +237,23 @@ function dataProcessingByLocation(data, loc) {
     revenueByLocation,
     tabelPerLokasi,
     [labels, quantities],
-    [locations, categories, dataMap],
+    [locations, categoriesRev, categoriesDatasets],
     [categoriyTC, transactions],
     [products, prodTransactions, prodCategories],
+    productSalesOutput,
   ];
 }
 
 function initialDataProcessing(data) {
+  //PRODUCT SALES
+  let productSales = 0;
+  let productSalesOutput = 0;
+  data.forEach((e) => {
+    productSales += parseInt(e.RQty);
+  });
+
+  productSalesOutput = productSales.toLocaleString("id-ID");
+
   //0. TOTAL REVENUE KESELURUHAN
   let totalRevenue = 0;
   let totalRevenueOutput = 0;
@@ -315,8 +365,17 @@ function initialDataProcessing(data) {
   const locations = Array.from(dataMap.keys());
   const categoriesRev = Array.from(new Set(data.map((item) => item.Category)));
 
-  //7.
-  // Extract category names and transaction counts
+  // Buat datasets untuk Chart.js
+  const categoriesDatasets = categoriesRev.map((category, index) => {
+    return {
+      label: category,
+      data: locations.map((location) => {
+        return dataMap.get(location).get(category) || 0;
+      }),
+    };
+  });
+
+  //7. Extract category names and transaction counts
   const categoryMap = {};
 
   data.forEach((item) => {
@@ -333,8 +392,7 @@ function initialDataProcessing(data) {
   const categoriyTC = Object.keys(categoryMap);
   const transactions = Object.values(categoryMap);
 
-  //8.
-  // Extract product names, categories, and transaction counts
+  //8. Extract product names, categories, and transaction counts
   const productMap = {};
 
   data.forEach((item) => {
@@ -365,11 +423,6 @@ function initialDataProcessing(data) {
     (product) => productMap[product].category
   );
 
-  // Log the processed data for debugging
-  // console.log("Products:", products);
-  // console.log("Transaction:", prodTransactions);
-  // console.log("Category:", prodCategories);
-
   return [
     totalRevenueOutput,
     jumlahTransaksiOuput,
@@ -377,9 +430,10 @@ function initialDataProcessing(data) {
     topProduct,
     revenueByLocation,
     [labels, quantities],
-    [locations, categoriesRev, dataMap],
+    [locations, categoriesRev, categoriesDatasets],
     [categoriyTC, transactions, categoryMap],
     [products, prodTransactions, prodCategories],
+    productSalesOutput,
   ];
 }
 
@@ -394,6 +448,10 @@ async function fetchData() {
     const data = await response.json();
     //VARIABLE UNTUK MENAMPUNG DATA OLAHAN PERTAMA
     const initalData = initialDataProcessing(data);
+
+    //MENAMPILKAN DATA PRODUCT SALES
+    const productSalesPrint = document.querySelector(".item1 .dataValue");
+    productSalesPrint.textContent = initalData[9];
 
     //MENAMPILKAN DATA JUMLAH TRANSAKSI KE WEB
     const transactionPrint = document.querySelector(".item2 .dataValue");
@@ -522,8 +580,6 @@ async function fetchData() {
           {
             label: "Total Product",
             data: initalData[5][1],
-            // backgroundColor: "rgba(75, 192, 192, 0.5)",
-            // borderColor: "rgba(75, 192, 192, 1)",
             borderWidth: 1,
           },
         ],
@@ -549,45 +605,28 @@ async function fetchData() {
             },
             color: "black",
           },
+          legend: {
+            display: false,
+          },
         },
       },
     });
 
-    // Soft colors array
-    const softColors = [
-      "rgba(255, 99, 132, 0.6)",
-      "rgba(54, 162, 235, 0.6)",
-      "rgba(255, 206, 86, 0.6)",
-      "rgba(75, 192, 192, 0.6)",
-      "rgba(153, 102, 255, 0.6)",
-      "rgba(255, 159, 64, 0.6)",
-    ];
-
-    // Buat datasets untuk Chart.js
-    const categoriesDatasets = initalData[6][1].map((category, index) => {
-      return {
-        label: category,
-        data: initalData[6][0].map((location) => {
-          return initalData[6][2].get(location).get(category) || 0;
-        }),
-        // backgroundColor: softColors[index % softColors.length],
-      };
-    });
-
-    // Render chart menggunakan Chart.js
+    // MEMBUAT CHART REVENUE CATEGORY
     const ctx = document.getElementById("revenueBarChart").getContext("2d");
     const categoriesRevenueChart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: initalData[6][0],
-        datasets: categoriesDatasets,
+        datasets: initalData[6][2],
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
-            text: "Total Revenue per Location and Category",
+            text: "Total Revenue by Category",
             font: {
               size: 20,
             },
@@ -618,29 +657,13 @@ async function fetchData() {
           {
             label: "Transactions",
             data: initalData[7][1],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.7)",
-              "rgba(54, 162, 235, 0.7)",
-              "rgba(255, 206, 86, 0.7)",
-              "rgba(75, 192, 192, 0.7)",
-              "rgba(153, 102, 255, 0.7)",
-              "rgba(255, 159, 64, 0.7)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
             borderWidth: 1,
           },
         ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         layout: {
           padding: {
             top: 16,
@@ -652,7 +675,7 @@ async function fetchData() {
         plugins: {
           title: {
             display: true,
-            text: "Best-selling Product Category",
+            text: "Best-selling Category",
             font: {
               size: 19,
               family: "Arial",
@@ -664,7 +687,7 @@ async function fetchData() {
       },
     });
 
-    // Create the bar chart
+    // Create the top 10 product bar chart
     const topProdctx = document.getElementById("myBarChart").getContext("2d");
     const top10ProductChart = new Chart(topProdctx, {
       type: "bar",
@@ -672,16 +695,22 @@ async function fetchData() {
         labels: initalData[8][0],
         datasets: [
           {
-            data: initalData[8][1], // Removed label property
-            // backgroundColor: colors,
-            // borderColor: borderColors,
+            data: initalData[8][1],
             borderWidth: 1,
           },
         ],
       },
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
+        layout: {
+          padding: {
+            top: 16,
+            bottom: 24,
+            left: 0,
+            right: 48,
+          },
+        },
         plugins: {
           title: {
             display: true,
@@ -727,10 +756,11 @@ async function fetchData() {
         { data: "Revenue" },
       ],
       bDestroy: true,
-      // scrollX: true,
+      scrollX: true,
       scrollY: "50vh",
       paging: true,
       responsive: true,
+      maintainAspectRatio: false,
     });
 
     //FIlTER DROPDOWN
@@ -756,6 +786,10 @@ async function fetchData() {
     });
 
     function updateDashboard(option, locationLabel) {
+      //MENAMPILKAN DATA PRODUCT SALES
+      const productSalesPrint = document.querySelector(".item1 .dataValue");
+      productSalesPrint.textContent = option[10];
+
       // MENAMPILKAN DATA TOTAL REVENUE KE WEB
       const revenuePrint = document.querySelector(".item3 .dataValue");
       revenuePrint.textContent = `$${option[0]}`;
@@ -780,20 +814,9 @@ async function fetchData() {
       );
       productSalesPerMonth.data.datasets[0].data = option[6][1];
 
-      //DATASET UNTUK CATEGORIES REVENUE PER LOKASI
-      const categoriesLocData = option[7][1].map((category, index) => {
-        return {
-          label: category,
-          data: option[7][0].map((location) => {
-            return option[7][2].get(location).get(category) || 0;
-          }),
-          backgroundColor: softColors[index % softColors.length],
-        };
-      });
-
       //MENAMPILKAN DATA REVENUE CATEGORI PER LOKASI
       categoriesRevenueChart.data.labels = option[7][0];
-      categoriesRevenueChart.data.datasets = categoriesLocData;
+      categoriesRevenueChart.data.datasets = option[7][2];
 
       //MENAMPILKAN DATA TRANSAKSI CATEGORI PER LOKASI
       categoryDonut.data.labels = option[8][0];
@@ -819,7 +842,7 @@ async function fetchData() {
             { data: "Revenue" },
           ],
           bDestroy: true,
-          // scrollX: true,
+          scrollX: true,
           scrollY: "50vh",
           paging: true,
           responsive: true,
@@ -835,6 +858,10 @@ async function fetchData() {
     }
 
     function resetDashboard(reset) {
+      //MENAMPILKAN DATA PRODUCT SALES
+      const productSalesPrint = document.querySelector(".item1 .dataValue");
+      productSalesPrint.textContent = reset[9];
+
       // MENAMPILKAN DATA TOTAL REVENUE KE WEB
       const revenuePrint = document.querySelector(".item3 .dataValue");
       revenuePrint.textContent = `$${reset[0]}`;
@@ -868,8 +895,9 @@ async function fetchData() {
       );
       productSalesPerMonth.data.datasets[0].data = reset[5][1];
 
+      //MENAMPILKAN DATA REVENUE CATEGORI
       categoriesRevenueChart.data.labels = reset[6][0];
-      categoriesRevenueChart.data.datasets = categoriesDatasets;
+      categoriesRevenueChart.data.datasets = reset[6][2];
 
       //MENAMPILKAN DATA TRANSAKSI CATEGORI
       categoryDonut.data.labels = reset[7][0];
@@ -895,7 +923,7 @@ async function fetchData() {
             { data: "Revenue" },
           ],
           bDestroy: true,
-          // scrollX: true,
+          scrollX: true,
           scrollY: "50vh",
           paging: true,
           responsive: true,

@@ -27,10 +27,6 @@ header {
   align-items: center;
 }
 
-.material-symbols-outlined {
-  cursor: pointer;
-}
-
 main header .left h1 {
   margin-bottom: 0px;
 }
@@ -46,61 +42,20 @@ main header .left p {
   font-weight: 300;
 }
 
-main header .right .profile-card {
-  display: none;
-  position: absolute;
-  transform: translateX(-80%);
-  width: 250px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-}
-
-main header .right:hover .profile-card {
-  display: block;
-}
-
-main header .right .profile-card::before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 10px;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
-}
-
-main header .right a {
+main header .right span {
   text-decoration: none;
+  padding: 10px;
+  transition: all 300ms ease-in;
+  cursor: pointer;
 }
 
-main header .right a:active {
-  color: #2c2556;
-}
-
-main header .right:hover span {
+main header .right span:hover {
   background-color: lightgray;
   border-radius: 50%;
 }
 
-.profile-name {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.profile-role {
-  font-size: 14px;
-  color: #777;
-  margin: 5px 0;
-}
-
-.profile-description {
-  font-size: 14px;
-  color: #555;
+main header .right a:active {
+  color: #2c2556;
 }
 
 .dropdownFilter {
@@ -250,7 +205,6 @@ option {
 }
 .item9 {
   grid-area: item9;
-  max-height: 420px;
   display: grid;
   place-content: center;
 }

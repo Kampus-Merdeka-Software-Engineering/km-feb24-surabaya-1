@@ -20,6 +20,7 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css"
     />
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
     <title>Dashboard Project</title>
@@ -37,19 +38,13 @@
           </div>
         </div>
         <div class="right">
-          <a href="teamMember.html">
-            <span class="material-symbols-outlined" style="font-size: 36px">
-              group
-            </span>
-            <div class="profile-card">
-              <p class="profile-name">John Doe</p>
-              <p class="profile-role">Web Developer</p>
-              <p class="profile-description">
-                John is a seasoned developer with a passion for creating dynamic
-                user experiences.
-              </p>
-            </div>
-          </a>
+          <span
+            id="teamMember"
+            class="material-symbols-outlined"
+            style="font-size: 36px"
+          >
+            group
+          </span>
         </div>
       </header>
       <div class="filter">
@@ -69,7 +64,7 @@
       <div class="content">
         <div class="grid-item item1">
           <div class="top">
-            <p class="dataTitle">Total Sales</p>
+            <p class="dataTitle">Product Sales</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1em"
@@ -83,12 +78,12 @@
               />
             </svg>
           </div>
-          <p class="dataValue">$53.600</p>
+          <p class="dataValue"></p>
           <p class="shortDesc">Lorem ipsum dolor sit.</p>
         </div>
         <div class="grid-item item2">
           <div class="top">
-            <p class="dataTitle">Total Orders</p>
+            <p class="dataTitle">Total Transaction</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1em"
@@ -161,8 +156,9 @@
         <div class="grid-item item10">
           <canvas id="myBarChart"></canvas>
         </div>
+
         <div class="grid-item item11">
-          <table id="myTable" class="display">
+          <table id="myTable" class="display" style="width: 100%">
             <thead>
               <tr>
                 <th>Transaction ID</th>
@@ -201,6 +197,9 @@
 
     <!-- import chartJs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- import sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Javascript -->
     <script src="script.js"></script>
