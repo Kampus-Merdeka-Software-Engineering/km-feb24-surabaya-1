@@ -786,6 +786,14 @@ async function fetchData() {
     });
 
     function updateDashboard(option, locationLabel) {
+      const locationName = locationLabel;
+
+      //MENAMPILKAN LOKASI DI TEKS DESKRIPSI
+      const desc = document.querySelectorAll(".shortDesc");
+      for (i = 0; i < desc.length; i++) {
+        desc[i].textContent = `at ${locationName}`;
+      }
+
       //MENAMPILKAN DATA PRODUCT SALES
       const productSalesPrint = document.querySelector(".item1 .dataValue");
       productSalesPrint.textContent = option[10];
@@ -858,6 +866,12 @@ async function fetchData() {
     }
 
     function resetDashboard(reset) {
+      //MENAMPILKAN LOKASI DI TEKS DESKRIPSI
+      const desc = document.querySelectorAll(".shortDesc");
+      for (i = 0; i < desc.length; i++) {
+        desc[i].textContent = `at All Location`;
+      }
+
       //MENAMPILKAN DATA PRODUCT SALES
       const productSalesPrint = document.querySelector(".item1 .dataValue");
       productSalesPrint.textContent = reset[9];
