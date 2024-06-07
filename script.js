@@ -1,23 +1,31 @@
+const teamMemberBtn = document.getElementById("teamMember");
+const modals = document.querySelector(".modals");
+const yesButton = document.querySelector(".modals-btn .submit");
+const noButton = document.querySelector(".modals-btn .reset");
+const screenOverlay = document.querySelector(".overlay");
+
+teamMemberBtn.addEventListener("click", function () {
+  modals.style.display = "flex";
+  screenOverlay.style.display = "block";
+  document.body.style.pointerEvents = "none";
+  modals.style.pointerEvents = "auto";
+});
+
+noButton.addEventListener("click", function () {
+  modals.style.display = "none";
+  screenOverlay.style.display = "none";
+  document.body.style.pointerEvents = "";
+});
+
+yesButton.addEventListener("click", function () {
+  window.location.href = "./teamMemberPage/teamMember.html";
+});
+
 AOS.init({
   offset: 120,
   duration: 600,
   easing: "ease-in-out-sine",
   delay: 100,
-});
-
-const teamMember = document.getElementById("teamMember");
-teamMember.addEventListener("click", function () {
-  Swal.fire({
-    title: "Pindah ke Halaman Team Member?",
-    showDenyButton: true,
-    confirmButtonText: "Yes",
-    denyButtonText: "No",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      window.location.href = "./teamMemberPage/teamMember.html";
-    } else if (result.isDenied) {
-    }
-  });
 });
 
 //FUNSI UNTUK UPDATE WAKTU

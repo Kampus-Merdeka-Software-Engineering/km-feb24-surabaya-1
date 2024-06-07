@@ -4,7 +4,7 @@ body {
   font-family: Inter, Montserrat, Roboto, Arial;
   display: flex;
   height: 100%;
-  background-color: #f1faff;
+  background-color: rgba(240, 250, 255);
 }
 
 /* CONTENT SECTION */
@@ -52,6 +52,78 @@ main header .right span:hover {
 
 main header .right a:active {
   color: #2c2556;
+}
+
+.modals {
+  width: 500px;
+  height: 180px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  background-color: white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+  padding: 20px;
+  border: 1px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: zoomIn 0.3s ease-in-out forwards;
+}
+
+.modals span {
+  font-size: 32px;
+  font-weight: bold;
+  color: #676767;
+}
+
+.modals-btn {
+  display: flex;
+  gap: 10px;
+}
+
+.modals-btn button {
+  height: 3rem;
+  width: 4rem;
+  border-radius: 4px;
+  border: 2px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modals-btn .submit {
+  background-color: #4d466e;
+  color: white;
+}
+
+.modals-btn .submit:hover {
+  background-color: #3b3a5a;
+}
+
+.modals-btn .reset {
+  background-color: rgb(210, 85, 72);
+  color: white;
+}
+
+.modals-btn .reset:hover {
+  background-color: rgb(180, 65, 52);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
 }
 
 .dropdownFilter {
@@ -223,6 +295,17 @@ table {
 
 footer {
   text-align: center;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
 }
 
 /* for small desktop */
