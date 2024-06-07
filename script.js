@@ -1,7 +1,7 @@
 const teamMember = document.getElementById("teamMember");
 teamMember.addEventListener("click", function () {
   Swal.fire({
-    title: "Pindah ke halaman Team Member?",
+    title: "Pindah ke Halaman Team Member?",
     showDenyButton: true,
     confirmButtonText: "Yes",
     denyButtonText: "No",
