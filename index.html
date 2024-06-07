@@ -21,6 +21,12 @@
       href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css"
     />
 
+    <!-- Import Animate on Scroll CSS-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
     <title>Dashboard Project</title>
@@ -62,7 +68,7 @@
         </h5>
       </div>
       <div class="content">
-        <div class="grid-item item1">
+        <div data-aos="fade-up" class="grid-item item1">
           <div class="top">
             <p class="dataTitle">Product Sold</p>
             <svg
@@ -81,7 +87,7 @@
           <p class="dataValue"></p>
           <p class="shortDesc">at All Location</p>
         </div>
-        <div class="grid-item item2">
+        <div data-aos="fade-up" class="grid-item item2">
           <div class="top">
             <p class="dataTitle">Total Transaction</p>
             <svg
@@ -100,7 +106,7 @@
           <p class="dataValue"></p>
           <p class="shortDesc">at All Location</p>
         </div>
-        <div class="grid-item item3">
+        <div data-aos="fade-up" class="grid-item item3">
           <div class="top">
             <p class="dataTitle">Revenue</p>
             <svg
@@ -119,7 +125,7 @@
           <p class="dataValue"></p>
           <p class="shortDesc">at All Location</p>
         </div>
-        <div class="grid-item item4">
+        <div data-aos="fade-up" class="grid-item item4">
           <div class="top">
             <p class="dataTitle">Top Product</p>
             <svg
@@ -138,26 +144,26 @@
           <p class="dataValue">55%</p>
           <p class="shortDesc">at All Location</p>
         </div>
-        <div class="grid-item item5">
+        <div data-aos="fade-up" class="grid-item item5">
           <canvas id="revenueChart"></canvas>
         </div>
-        <div class="grid-item item6">
+        <div data-aos="fade-up" class="grid-item item6">
           <canvas id="transactionTypeChart"></canvas>
         </div>
-        <div class="grid-item item7">
+        <div data-aos="fade-up" class="grid-item item7">
           <canvas id="horizontalBarChart"></canvas>
         </div>
-        <div class="grid-item item8">
+        <div data-aos="fade-up" class="grid-item item8">
           <canvas id="revenueBarChart"></canvas>
         </div>
-        <div class="grid-item item9">
+        <div data-aos="fade-up" class="grid-item item9">
           <canvas id="myDoughnutChart"></canvas>
         </div>
-        <div class="grid-item item10">
+        <div data-aos="fade-up" class="grid-item item10">
           <canvas id="myBarChart"></canvas>
         </div>
 
-        <div class="grid-item item11">
+        <div data-aos="fade-up" class="grid-item item11">
           <table id="myTable" class="display" style="width: 100%">
             <thead>
               <tr>
@@ -200,6 +206,9 @@
 
     <!-- import sweetalert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--  import Animate on Scroll JS-->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
     <!-- Javascript -->
     <script src="script.js"></script>

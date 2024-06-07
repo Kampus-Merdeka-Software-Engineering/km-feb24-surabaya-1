@@ -1,3 +1,10 @@
+AOS.init({
+  offset: 120,
+  duration: 600,
+  easing: "ease-in-out-sine",
+  delay: 100,
+});
+
 const teamMember = document.getElementById("teamMember");
 teamMember.addEventListener("click", function () {
   Swal.fire({
