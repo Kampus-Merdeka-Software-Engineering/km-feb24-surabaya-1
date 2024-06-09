@@ -1,12 +1,9 @@
-/* * {
-  border: 1px solid;
-} */
-
 body {
   background-color: rgb(237, 237, 237);
   background-image: url("../assets/img/wave.png");
+  /* background-size: 100%; */
   background-size: 100% 450px;
-  background-position: top fixed;
+  background-position: top;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -22,7 +19,7 @@ header span {
   top: 0;
   right: 0;
   color: white;
-  padding: 30px;
+  padding: 5vh 2vw 0 0;
   transition: all 300ms ease-in-out;
   cursor: pointer;
 }
@@ -33,8 +30,10 @@ header span:hover {
 
 #title {
   text-align: center;
-  margin-bottom: 0px;
+  margin: 20px auto 0px;
   color: white;
+  font-size: clamp(16px 20px 24px);
+  width: clamp(200px, 75%, 100%);
 }
 
 #titleDesc {

@@ -1,3 +1,10 @@
+AOS.init({
+  offset: 120,
+  duration: 600,
+  easing: "ease-in-out-sine",
+  delay: 100,
+});
+
 function generateCard(data) {
   //MEMBUAT ELEMEN CARD
   const card = document.createElement("div");
@@ -105,4 +112,4 @@ async function fetchData() {
   }
 }
 
-fetchData();
+//fetchData();

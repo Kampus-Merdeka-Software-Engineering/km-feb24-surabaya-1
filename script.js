@@ -722,14 +722,15 @@ async function fetchData() {
           padding: {
             top: 16,
             bottom: 24,
-            left: 0,
-            right: 48,
+            left: 24,
+            right: 24,
           },
         },
         plugins: {
           title: {
             display: true,
             text: "Top 10 Products with the Largest Transactions",
+            align: "center",
             font: {
               size: 19,
               family: "Arial",
