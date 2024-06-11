@@ -1,3 +1,4 @@
+// MODAL POPUP
 const teamMemberBtn = document.getElementById("teamMember");
 const modals = document.querySelector(".modals");
 const yesButton = document.querySelector(".modals-btn .submit");
@@ -21,6 +22,7 @@ yesButton.addEventListener("click", function () {
   window.location.href = "./teamMemberPage/teamMember.html";
 });
 
+//AOS LIB
 AOS.init({
   offset: 120,
   duration: 600,
@@ -729,7 +731,7 @@ async function fetchData() {
         plugins: {
           title: {
             display: true,
-            text: "Top 10 Products with the Largest Transactions",
+            text: "Top 10 Transactions Products",
             align: "center",
             font: {
               size: 19,

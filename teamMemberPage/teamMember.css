@@ -32,8 +32,8 @@ header span:hover {
   text-align: center;
   margin: 20px auto 0px;
   color: white;
-  font-size: clamp(16px 20px 24px);
-  width: clamp(200px, 75%, 100%);
+  /* font-size: clamp(16px 20px 24px); */
+  /* width: clamp(200px, 75%, 100%); */
 }
 
 #titleDesc {
